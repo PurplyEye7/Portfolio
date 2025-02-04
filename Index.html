@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Futuristic Portfolio</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(167, 66, 245, 0.1);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #a742f5;
+            border-radius: 10px;
+            border: 2px solid rgba(167, 66, 245, 0.1);
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #8a35d1;
+        }
+
+        body {
+            background: #0a0a0a;
+            color: #fff;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            width: 100%;
+            padding: 20px 0;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        nav ul li {
+            list-style: none;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 18px;
+            position: relative;
+            padding: 5px 10px;
+            transition: 0.3s;
+        }
+
+        nav ul li a::before {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #a742f5;
+            transition: 0.3s;
+            box-shadow: 0 0 10px #a742f5;
+        }
+
+        nav ul li a:hover::before {
+            width: 100%;
+        }
+
+        /* Sections */
+        section {
+            min-height: 100vh;
+            padding: 100px 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-title {
+            font-size: 4rem;
+            margin-bottom: 30px;
+            color: #a742f5;
+            text-shadow: 0 0 10px rgba(167, 66, 245, 0.5);
+        }
+
+        /* Home Section */
+        #home {
+            background: linear-gradient(45deg, #0a0a0a, #1a1a1a);
+        }
+
+        .home-content {
+            text-align: center;
+        }
+
+        .profile-image {
+            width: 700px;
+            height: 700px;
+            border-radius: 50%;
+            margin: 0 auto 30px;
+            border: 3px solid #a742f5;
+            transition: box-shadow 0.3s ease;
+            object-fit: cover;
+        }
+
+        .profile-image:hover {
+            box-shadow: 0 0 100px #a742f5;
+        }
+
+        .home-content h1 {
+            font-size: 5em;
+            margin-bottom: 20px;
+            color: #a742f5;
+            text-shadow: 0 0 20px rgba(167, 66, 245, 0.5);
+        }
+
+        .home-content p {
+            font-size: 2em;
+            margin-bottom: 30px;
+            color: #ccc;
+        }
+
+        .social-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .social-button {
+            width: 60px;
+            height: 60px;
+            padding: 0;
+            background: #a742f5;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 50%;
+            font-weight: 600;
+            transition: 0.3s;
+            border: 2px solid transparent;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .social-button:hover {
+            background: transparent;
+            border-color: #a742f5;
+            box-shadow: 0 0 20px rgba(167, 66, 245, 0.5);
+        }
+
+        .social-button::before {
+            content: '';
+            width: 24px;
+            height: 24px;
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+
+        .social-button[href*="youtube"]::before {
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23fff"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>');
+        }
+
+        .social-button[href*="x.com"]::before {
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23fff"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>');
+        }
+
+        /* About Section */
+        #about {
+            background: #0d0d0d;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+            font-size: 2.5rem;
+        }
+
+        .about-image {
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            margin: 0 auto;
+            border: 3px solid #a742f5;
+            transition: box-shadow 0.3s ease;
+            object-fit: cover;
+        }
+
+        .about-image:hover {
+            box-shadow: 0 0 50px #a742f5;
+        }
+
+        /* Services Section */
+        #services {
+            background: #0f0f0f;
+        }
+
+        .services-grid {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2.5rem;
+            padding: 2rem;
+        }
+
+        .service-card {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #0d0d0d;
+            width: 350px;
+            height: 450px;
+            border-radius: 2rem;
+            cursor: pointer;
+            border: 2px solid #a742f5;
+            transition: 0.4s ease-in-out;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .service-card h3 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(45deg, #a742f5, #8a35d1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .service-card p {
+            font-size: 1.5rem;
+            line-height: 1.6;
+            color: #ccc;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 0 30px rgba(167, 66, 245, 0.2);
+            background-color: rgba(167, 66, 245, 0.05);
+        }
+
+        /* Projects Section */
+        #projects {
+            background: linear-gradient(135deg, #0d0d0d 0%, #1a1a1a 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        #projects::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent 45%, rgba(167, 66, 245, 0.1) 50%, transparent 55%);
+            animation: scanline 4s linear infinite;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            position: relative;
+            z-index: 1;
+            padding: 20px;
+        }
+
+        .project-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(167, 66, 245, 0.3);
+            box-shadow: 0 0 20px rgba(167, 66, 245, 0.1);
+            backdrop-filter: blur(5px);
+            background: rgba(13, 13, 13, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(167, 66, 245, 0.3), transparent);
+            transform: rotate(45deg);
+            animation: shine 3s infinite;
+        }
+
+        .project-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+            filter: drop-shadow(0 0 10px rgba(167, 66, 245, 0.3));
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:has(img[alt="Gojo"]),
+        .project-card:has(img[alt="Surge Thumbnail"]) {
+            aspect-ratio: 16/9;
+        }
+
+        .project-card:has(img[alt="Raw GFX"]) {
+            aspect-ratio: 1/1;
+            grid-row: span 2;
+            grid-column: 2;
+        }
+
+        .project-info {
+            position: absolute;
+            bottom: -100%;
+            left: 0;
+            width: 100%;
+            padding: 20px;
+            background: rgba(13, 13, 13, 0.95);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(167, 66, 245, 0.5);
+            transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 0 30px rgba(167, 66, 245, 0.3);
+        }
+
+        .project-card:hover img {
+            transform: scale(1.05);
+        }
+
+        .project-card:hover .project-info {
+            bottom: 0;
+            box-shadow: 0 -10px 20px rgba(167, 66, 245, 0.2);
+        }
+
+        @keyframes scanline {
+            0% { transform: translateY(-50%) rotate(45deg); }
+            100% { transform: translateY(50%) rotate(45deg); }
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) rotate(45deg); }
+        }
+
+        /* Contact Section */
+        #contact {
+            background: #0f0f0f;
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            background: rgba(167, 66, 245, 0.1);
+            border: 1px solid rgba(167, 66, 245, 0.3);
+            color: #fff;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #a742f5;
+            box-shadow: 0 0 10px rgba(167, 66, 245, 0.3);
+        }
+
+        button {
+            padding: 10px 30px;
+            background: #a742f5;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #8a35d1;
+            box-shadow: 0 0 20px rgba(167, 66, 245, 0.5);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate {
+            animation: fadeIn 1s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section id="home">
+        <div class="container">
+            <div class="home-content animate">
+                <img src="Purply.png" alt="Profile Picture" class="profile-image">
+                <h1>Hi, I'm Purply</h1>
+                <p>I'm a GFX artist.</p>
+                <div class="social-buttons">
+                    <a href="https://www.youtube.com/@PurplyEye7" target="_blank" class="social-button"></a>
+                    <a href="https://x.com/PurplyEye7" target="_blank" class="social-button"></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-content animate">
+                <div class="about-text">
+                    <p>I'm a GFX artist who began designing in 2021. I specialize in creating high-quality, eye-catching designs that stand out. My focus is on delivering visually striking artwork that captures attention and leaves a lasting impression, whether for digital marketing, social media, or personal projects.</p>
+                </div>
+                <img src="Purply.png" alt="About Picture" class="about-image">
+            </div>
+        </div>
+    </section>
+
+    <section id="services">
+        <div class="container">
+            <h2 class="section-title">Services</h2>
+            <div class="services-grid animate">
+                <div class="service-card">
+                    <h3>GFX Design</h3>
+                    <p>Creating fresh and eye-catching designs.</p>
+                </div>
+                <div class="service-card">
+                    <h3>UI/UX Design</h3>
+                    <p>Designing intuitive and clean user interface</p>
+                </div>
+                <div class="service-card">
+                    <h3>Video Making</h3>
+                    <p>I create stunning videos and thumbnail for youtube</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <div class="container">
+            <h2 class="section-title">Projects</h2>
+            <div class="projects-grid animate">
+                <div class="project-card">
+                    <img src="Gojo gfx watermarked.png" alt="Gojo GFX">
+                    <div class="project-info">
+                        <h3>Gojo GFX</h3>
+                        <p>Custom graphics design for Gojo character</p>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <img src="raw gfx watermarked.png" alt="Raw GFX">
+                    <div class="project-info">
+                        <h3>GFX for clothing group</h3>
+                        <p>GFX for Dreamwave's clothing group</p>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <img src="surge thumbnail watermarked.png" alt="Surge Thumbnail">
+                    <div class="project-info">
+                        <h3>Surge Thumbnail</h3>
+                        <p>Custom thumbnail design for Surge project</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title">Contact Me</h2>
+            <div class="contact-form animate">
+                </form action="send_email.php" method="POST">
+                    <div class="form-group">
+                        <input type="text" name="name" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" name="email" placeholder="Your Email" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+                    </div>
+                    <button type="submit">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+    <p>
+     ©PurplyEye7 | All Rights Reserved
+    </p>
+
+    <script>
+        // Intersection Observer for animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        // Observe all elements with animate class
+        document.querySelectorAll('.animate').forEach((element) => {
+            observer.observe(element);
+        });
+    </script>
+</body>
+</html>
