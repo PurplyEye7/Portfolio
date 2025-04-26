@@ -108,6 +108,15 @@
         }
 
         /* Home Section */
+        .profile-image {
+    width: 700px; /* Ensure width and height are equal */
+    height: 700px;
+    border-radius: 50%; /* This makes the image round */
+    margin: 0 auto 30px;
+    border: 3px solid #a742f5;
+    transition: box-shadow 0.3s ease;
+    object-fit: cover; /* Ensures the image covers the entire area */
+}
         #home {
             background: linear-gradient(45deg, #0a0a0a, #1a1a1a);
         }
@@ -190,29 +199,54 @@
 
         /* About Section */
         #about {
-            background: #0d0d0d;
+            background: linear-gradient(to bottom, #0d0d0d, #0f0f0f);
+            padding: 6rem 0;
+            position: relative;
+            overflow: hidden;
         }
 
         .about-content {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 50px;
+            gap: 80px;
             align-items: center;
-            font-size: 2.5rem;
+            font-size: 1.8rem;
+            line-height: 1.6;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
         }
 
         .about-image {
-            width: 600px;
-            height: 600px;
+            width: 500px;
+            height: 500px;
             border-radius: 50%;
             margin: 0 auto;
-            border: 3px solid #a742f5;
-            transition: box-shadow 0.3s ease;
+            border: 4px solid rgba(167, 66, 245, 0.3);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             object-fit: cover;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+
+        .about-image::after {
+            content: '';
+            position: absolute;
+            inset: -3px;
+            border-radius: 50%;
+            padding: 3px;
+            background: linear-gradient(45deg, #a742f5, #8a35d1);
+            -webkit-mask: 
+                linear-gradient(#fff 0 0) content-box, 
+                linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0.7;
         }
 
         .about-image:hover {
-            box-shadow: 0 0 50px #a742f5;
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(167, 66, 245, 0.2);
         }
 
         /* Services Section */
@@ -282,7 +316,7 @@
 
         .projects-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: repeat(3, 1fr);
             gap: 30px;
             position: relative;
             z-index: 1;
@@ -302,6 +336,8 @@
             align-items: center;
             justify-content: center;
             padding: 20px;
+            aspect-ratio: 16/9;
+            cursor: pointer;
         }
 
         .project-card::before {
@@ -319,21 +355,10 @@
         .project-card img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain;
             border-radius: 10px;
             filter: drop-shadow(0 0 10px rgba(167, 66, 245, 0.3));
             transition: transform 0.3s ease;
-        }
-
-        .project-card:has(img[alt="Gojo"]),
-        .project-card:has(img[alt="Surge Thumbnail"]) {
-            aspect-ratio: 16/9;
-        }
-
-        .project-card:has(img[alt="Raw GFX"]) {
-            aspect-ratio: 1/1;
-            grid-row: span 2;
-            grid-column: 2;
         }
 
         .project-info {
@@ -360,6 +385,43 @@
         .project-card:hover .project-info {
             bottom: 0;
             box-shadow: 0 -10px 20px rgba(167, 66, 245, 0.2);
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .modal img {
+            max-width: 90%;
+            max-height: 90vh;
+            object-fit: contain;
+            transform: scale(0.8);
+            opacity: 0;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 0 50px rgba(167, 66, 245, 0.3);
+            border-radius: 10px;
+        }
+
+        .modal.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .modal.active img {
+            transform: scale(1);
+            opacity: 1;
         }
 
         @keyframes scanline {
@@ -489,51 +551,77 @@
         <div class="container">
             <h2 class="section-title">Projects</h2>
             <div class="projects-grid animate">
-                <div class="project-card">
+                <div class="project-card" onclick="openModal('Gojo gfx watermarked.png')">
                     <img src="Gojo gfx watermarked.png" alt="Gojo GFX">
                     <div class="project-info">
                         <h3>Gojo GFX</h3>
                         <p>Custom graphics design for Gojo character</p>
                     </div>
                 </div>
-                <div class="project-card">
+                <div class="project-card" onclick="openModal('raw gfx watermarked.png')">
                     <img src="raw gfx watermarked.png" alt="Raw GFX">
                     <div class="project-info">
                         <h3>GFX for clothing group</h3>
                         <p>GFX for Dreamwave's clothing group</p>
                     </div>
                 </div>
-                <div class="project-card">
+                <div class="project-card" onclick="openModal('surge thumbnail watermarked.png')">
                     <img src="surge thumbnail watermarked.png" alt="Surge Thumbnail">
                     <div class="project-info">
                         <h3>Surge Thumbnail</h3>
                         <p>Custom thumbnail design for Surge project</p>
                     </div>
                 </div>
+                <div class="project-card" onclick="openModal('gfx copy.png')">
+                    <img src="gfx copy.png" alt="GFX Copy">
+                    <div class="project-info">
+                        <h3>GFX Copy</h3>
+                        <p>Custom graphics design showcase</p>
+                    </div>
+                </div>
+                <div class="project-card" onclick="openModal('me vs ai.png')">
+                    <img src="me vs ai thumbnail.png" alt="Me vs AI">
+                    <div class="project-info">
+                        <h3>Me vs AI</h3>
+                        <p>Comparison project showcasing human vs AI design</p>
+                    </div>
+                </div>
+                <div class="project-card" onclick="openModal('ROYAL CHEST BSGI.png')">
+                    <img src="ROYAL CHEST BSGI.png" alt="Royal Chest">
+                    <div class="project-info">
+                        <h3>Royal Chest BSGI</h3>
+                        <p>Custom design for gaming project</p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-<section id="contact">
-    <div class="container">
-        <h2 class="section-title">Contact Me</h2>
-        <div class="contact-form animate">
-            <form action="send_email.php" method="POST">
-                <div class="form-group">
-                    <input type="text" name="name" placeholder="Your Name" required>
-                </div>
-                <div class="form-group">
-                    <input type="email" name="email" placeholder="Your Email" required>
-                </div>
-                <div class="form-group">
-                    <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
-                </div>
-                <button type="submit">Send Message</button>
-                <p style="margin-top: 10px; color: #ccc;">Or message me at purply.eye7@gmail.com</p>
-            </form>
-        </div>
+    <!-- Modal for full-size images -->
+    <div class="modal" onclick="closeModal()">
+        <img src="" alt="Full size image">
     </div>
-</section>
+
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title">Contact Me</h2>
+            <div class="contact-form animate">
+                <form action="send_email.php" method="POST">
+                    <div class="form-group">
+                        <input type="text" name="name" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" name="email" placeholder="Your Email" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+                    </div>
+                    <button type="submit">Send Message</button>
+<p style="margin-top: 10px; color: #ccc;">Or message me at purply.eye7@gmail.com</p>
+                </form>
+            </div>
+        </div>
+    </section>
     <p>
      ©PurplyEye7 | All Rights Reserved
     </p>
@@ -552,6 +640,29 @@
         document.querySelectorAll('.animate').forEach((element) => {
             observer.observe(element);
         });
+
+        // Modal functionality
+        function openModal(imageSrc) {
+            const modal = document.querySelector('.modal');
+            const modalImg = modal.querySelector('img');
+            modalImg.src = imageSrc;
+            modal.classList.add('active');
+            // Add small delay to ensure opacity transition works
+            setTimeout(() => {
+                modalImg.style.opacity = '1';
+                modalImg.style.transform = 'scale(1)';
+            }, 50);
+        }
+
+        function closeModal() {
+            const modal = document.querySelector('.modal');
+            const modalImg = modal.querySelector('img');
+            modalImg.style.opacity = '0';
+            modalImg.style.transform = 'scale(0.8)';
+            setTimeout(() => {
+                modal.classList.remove('active');
+            }, 300);
+        }
     </script>
 </body>
 </html>
